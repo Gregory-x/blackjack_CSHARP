@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static BlackJackV1.Card;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BlackJackV1
@@ -28,51 +29,37 @@ namespace BlackJackV1
             if (count == 0)
             {
                 pictureBox1.Visible = true;
-                pictureBox8.Visible = true;
                 count++;
             }
             else if (count == 1)
             {
                 pictureBox2.Visible = true;
-                pictureBox7.Visible = true;
+                //pictureBox7.Visible = true;
                 count++;
             }
             else if (count == 2)
             {
                 pictureBox3.Visible = true;
-                pictureBox6.Visible = true;
+                //pictureBox6.Visible = true;
                 count++;
             }
             else if (count == 3)
             {
                 pictureBox4.Visible = true;
-                pictureBox5.Visible = true;
+                //pictureBox5.Visible = true;
                 count = 0;
             }
 
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox2.Text = "kutya";
         }
     }
+
+
     //const int g_minimumDealerScore = 17;
 
     class Card
@@ -123,7 +110,7 @@ namespace BlackJackV1
 
         public void Print()
         {
-            switch (m_rank)
+            /*switch (m_rank)
             {
                 case Rank.rank_2: Console.Write('2'); break;
                 case Rank.rank_3: Console.Write('3'); break;
@@ -152,7 +139,7 @@ namespace BlackJackV1
                 default:
                     Console.Write('?');
                     break;
-            }
+            }*/
         }
 
         public int Value()
@@ -177,4 +164,65 @@ namespace BlackJackV1
             }
         }
     }
+
+    class Deck
+    {
+        private List<Card> m_deck;
+        private int m_cardIndex = 0;
+
+        public Deck()
+        {
+            m_deck = new List<Card>();
+
+            for (int suit = 0; suit < Card.max_suits; ++suit)
+            {
+                for (int rank = 0; rank < Card.max_ranks; ++rank)
+                {
+                    m_deck.Add(new Card((Card.Rank)rank, (Card.Suit)suit));
+                }
+            }
+        }
+
+        public void Print()
+        {
+            foreach (Card card in m_deck)
+            {
+                card.Print();
+                Console.Write(" ");
+            }
+
+            Console.WriteLine();
+        }
+
+        public void Shuffle()
+        {
+            Random rng = new Random();
+            int n = m_deck.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Card card = m_deck[k];
+                m_deck[k] = m_deck[n];
+                m_deck[n] = card;
+            }
+
+            m_cardIndex = 0;
+        }
+
+        public Card DealCard()
+        {
+            if (m_cardIndex >= m_deck.Count)
+            {
+                throw new InvalidOperationException("No more cards in the deck.");
+            }
+
+            return m_deck[m_cardIndex++];
+        }
+    }
+
+
+
+
+
 }

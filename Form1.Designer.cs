@@ -129,7 +129,6 @@
             this.pictureBox8.Size = new System.Drawing.Size(80, 140);
             this.pictureBox8.TabIndex = 4;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Visible = false;
             // 
             // button1
             // 
@@ -170,7 +169,6 @@
             this.textBox1.TabIndex = 10;
             this.textBox1.Text = "BLACKJACK PAYS 3 TO 2";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -184,7 +182,7 @@
             this.textBox2.Size = new System.Drawing.Size(79, 48);
             this.textBox2.TabIndex = 11;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.TextChanged += new System.EventHandler(this.button1_Click);
             // 
             // textBox3
             // 
@@ -198,7 +196,6 @@
             this.textBox3.Size = new System.Drawing.Size(79, 48);
             this.textBox3.TabIndex = 12;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // Form1
             // 
