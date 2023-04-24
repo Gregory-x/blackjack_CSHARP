@@ -224,9 +224,9 @@ namespace BlackJackV1
             {
                 int index = 0;
 
-                for (int suit = 0; suit < (int)Suit.MaxSuits; ++suit)
+                for (int suit = 0; suit < (int)Card.Suit.MaxSuits; ++suit)
                 {
-                    for (int rank = 0; rank < (int)Rank.MaxRanks; ++rank)
+                    for (int rank = 0; rank < (int)Card.Rank.MaxRanks; ++rank)
                     {
                         m_deck.Add(new Card((Card.Rank)rank, (Card.Suit)suit));
                         ++index;
