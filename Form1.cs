@@ -287,7 +287,7 @@ namespace BlackJackV1
                 return value;
             }
 
-            public int Score
+            public int Score 
             {
                 get { return m_score; }
             }
@@ -333,7 +333,7 @@ namespace BlackJackV1
                     if (PlayerWantsHit())
                     {
                         Card playerCard = player.DrawCard(deck);
-                        Console.WriteLine($"You were dealt a {playerCard} and now have {player.Score()}");
+                        Console.WriteLine($"You were dealt a {playerCard} and now have {player.Score}");
 
                     }
                     else
