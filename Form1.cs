@@ -332,7 +332,7 @@ namespace BlackJackV1
                 {
                     if (PlayerWantsHit())
                     {
-                        Card playerCard = player.DrawCard(deck);
+                        var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
                         Console.WriteLine($"You were dealt a {playerCard} and now have {player.Score}");
 
                     }
