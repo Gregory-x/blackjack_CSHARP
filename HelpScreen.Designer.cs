@@ -43,7 +43,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Blackjack\r\n\r\nI assume you know how to play blackjack but if not\r\ncheck it out her" +
     "e: \r\n\r\nCredits: Bihari Daniel Gergo, Kurcz Daniel";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // linkLabel1
             // 
@@ -55,7 +54,7 @@
             this.linkLabel1.TabIndex = 1;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "BlackJack";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
             // 
             // pictureBox1
             // 

@@ -15,6 +15,20 @@ namespace BlackJackV1
         public Form1()
         {
             InitializeComponent();
+            Deck deck = new Deck();
+            deck.Shuffle();
+
+            if (PlayBlackjack(deck)) // if true you win else you've lost
+            {
+                Console.WriteLine("You win!");
+            }
+            else
+            {
+                Console.WriteLine("You lose!");
+            }
+
+            // Equivalent of return 0; in C++
+            Environment.Exit(0);
         }
 
 
@@ -373,22 +387,9 @@ namespace BlackJackV1
 
             return (player.Score > dealer.Score);
         }
-        private void FormShown(object sender, EventArgs e)
-        {
-            Deck deck = new Deck();
-            deck.Shuffle();
-
-            if (PlayBlackjack(deck)) // if true you win else you've lost
-            {
-                Console.WriteLine("You win!");
-            }
-            else
-            {
-                Console.WriteLine("You lose!");
-            }
-
-            // Equivalent of return 0; in C++
-            Environment.Exit(0);
-        }
+        //private void FormShown(object sender, EventArgs e)
+        //{
+            
+        //}
     }
 }

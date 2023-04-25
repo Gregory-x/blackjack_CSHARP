@@ -30,5 +30,10 @@ namespace BlackJackV1
 
             helpWindow.Show();
         }
+
+        private void LoadExit(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
