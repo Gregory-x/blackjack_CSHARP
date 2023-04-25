@@ -54,12 +54,12 @@ namespace BlackJackV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox2.Text = "kutya";
+            PlayerWantsHit();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            PlayerWantsStand();
         }
 
         // Maximum score before losing.
@@ -301,24 +301,12 @@ namespace BlackJackV1
 
         bool PlayerWantsHit()
         {
-            while (true)
-            {
-                Console.Write("(h) to hit, or (s) to stand: ");
-                char ch = Console.ReadKey().KeyChar;
-                Console.WriteLine();
-
-                switch (ch)
-                {
-                    case 'h':
-                    case 'H':
-                        return true;
-                    case 's':
-                    case 'S':
-                        return false;
-                }
-            }
+            return true;
         }
-
+        bool PlayerWantsStand()
+        {
+            return false;
+        }
         bool PlayerTurn(Deck deck, Player player)
         {
             while (true)
@@ -385,24 +373,22 @@ namespace BlackJackV1
 
             return (player.Score > dealer.Score);
         }
-
-        class Program
+        private void FormShown(object sender, EventArgs e)
         {
-            static void Main()
+            Deck deck = new Deck();
+            deck.Shuffle();
+
+            if (PlayBlackjack(deck)) // if true you win else you've lost
             {
-                Deck deck = new Deck();
-
-                deck.Shuffle();
-
-                if (PlayBlackjack(deck))
-                {
-                    Console.WriteLine("You win!");
-                }
-                else
-                {
-                    Console.WriteLine("You lose!");
-                }
+                Console.WriteLine("You win!");
             }
+            else
+            {
+                Console.WriteLine("You lose!");
+            }
+
+            // Equivalent of return 0; in C++
+            Environment.Exit(0);
         }
     }
 }
