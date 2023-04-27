@@ -1,3 +1,6 @@
+// To do:         // fnc to decide if textbox1 gets the text or textbox2 which is the dealer's score
+                  // a way to implement pictures being shown in the Print() func and displaying current score in textBox1 -> player
+                  // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,26 +18,29 @@ namespace BlackJackV1
         public Form1()
         {
             InitializeComponent();
+            textBox1.Text = "";
+            textBox2.Text = "";
             Deck deck = new Deck();
             deck.Shuffle();
 
             if (PlayBlackjack(deck)) // if true you win else you've lost
             {
-                Console.WriteLine("You win!");
+                MessageBox.Show("You win!");
+                // should loop the play Blackjack until the user presses on the back to main menu arrow
             }
             else
             {
-                Console.WriteLine("You lose!");
+                MessageBox.Show("You lose!");
+                // should loop the play Blackjack until the user presses on the back to main menu arrow
             }
 
             // Equivalent of return 0; in C++
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 
         // default settings
         int count = 0;
-
 
         private void button2_MouseClick(object sender, MouseEventArgs e)
         {
@@ -62,16 +68,10 @@ namespace BlackJackV1
                 //pictureBox5.Visible = true;
                 count = 0;
             }
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             PlayerWantsHit();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             PlayerWantsStand();
         }
@@ -121,8 +121,8 @@ namespace BlackJackV1
                 this.rank = rank;
                 this.suit = suit;
             }
-
-            public void Print()
+            
+            public void Print() // pictures 
             {
                 switch (rank)
                 {
@@ -189,7 +189,7 @@ namespace BlackJackV1
                         break;
                 }
             }
-            public int Value()
+            public int Value() // textBox value static casted to String?
             {
                 switch (rank)
                 {
@@ -327,7 +327,7 @@ namespace BlackJackV1
             {
                 if (player.IsBust())
                 {
-                    Console.WriteLine("You busted. :( ");
+                    MessageBox.Show("You busted. :( ");
                     return true;
                 }
                 else
@@ -356,7 +356,7 @@ namespace BlackJackV1
 
             if (dealer.IsBust())
             {
-                Console.WriteLine("The dealer busted!");
+                MessageBox.Show("The dealer busted!");
                 return true;
             }
             return false;
@@ -367,13 +367,13 @@ namespace BlackJackV1
             Player dealer = new Player();
             dealer.DrawCard(deck);
 
-            Console.WriteLine("The dealer is showing: " + dealer.Score);
+            Console.WriteLine("The dealer is showing: " + dealer.Score); // rewrite to display pictures instead of this or next comment
 
             Player player = new Player();
-            player.DrawCard(deck);
+            player.DrawCard(deck); // should show the pictures when draws the card
             player.DrawCard(deck);
 
-            Console.WriteLine("You have: " + player.Score);
+            Console.WriteLine("You have: " + player.Score); // redundant
 
             if (PlayerTurn(deck, player))
             {
