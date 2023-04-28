@@ -1,6 +1,11 @@
 // To do:         // fnc to decide if textbox1 gets the text or textbox2 which is the dealer's score
                   // a way to implement pictures being shown in the Print() func and displaying current score in textBox1 -> player
                   // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
+                  // dynamic allocated pictures for the cards?
+                  // animate the getting cards thingy
+                  // PlayerWStand and PlayerWantsHit 
+                  // Somehow player.score is wrong ALWAYS resulting in busts
+                  // first runs everything before loading in the form like wtf not supposed to do that
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,19 +14,33 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BlackJackV1
 {
+    
     public partial class Form1 : Form
     {
+        // Maximum score before losing.
+        const int g_maximumScore = 21;
+
+        // Minimum score that the dealer has to have.
+        const int g_minimumDealerScore = 17;
+
+        // default settings
+        int count = 0;
+
         public Form1()
-        {
+        { 
             InitializeComponent();
             textBox1.Text = "";
             textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
             Deck deck = new Deck();
             deck.Shuffle();
+            //await Task.Delay(2000);
 
             if (PlayBlackjack(deck)) // if true you win else you've lost
             {
@@ -39,48 +58,7 @@ namespace BlackJackV1
         }
 
 
-        // default settings
-        int count = 0;
-
-        private void button2_MouseClick(object sender, MouseEventArgs e)
-        {
-            //Takes care of the visuals (visible property of the cards)
-            if (count == 0)
-            {
-                pictureBox1.Visible = true;
-                count++;
-            }
-            else if (count == 1)
-            {
-                pictureBox2.Visible = true;
-                //pictureBox7.Visible = true;
-                count++;
-            }
-            else if (count == 2)
-            {
-                pictureBox3.Visible = true;
-                //pictureBox6.Visible = true;
-                count++;
-            }
-            else if (count == 3)
-            {
-                pictureBox4.Visible = true;
-                //pictureBox5.Visible = true;
-                count = 0;
-            }
-            PlayerWantsHit();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PlayerWantsStand();
-        }
-
-        // Maximum score before losing.
-        const int g_maximumScore = 21;
-
-        // Minimum score that the dealer has to have.
-        const int g_minimumDealerScore = 17;
+       
 
         class Card
         {
@@ -122,7 +100,7 @@ namespace BlackJackV1
                 this.suit = suit;
             }
             
-            public void Print() // pictures 
+            public void Print() // should be replaced by pictures 
             {
                 switch (rank)
                 {
@@ -306,7 +284,7 @@ namespace BlackJackV1
                 get { return m_score; }
             }
 
-            public bool IsBust()
+            public bool IsBust() // only bust if m_score > g_maximumScore is a true inequality
             {
                 return (m_score > g_maximumScore);
             }
@@ -315,6 +293,30 @@ namespace BlackJackV1
 
         bool PlayerWantsHit()
         {
+            //Takes care of the visuals (visible property of the cards)
+            if (count == 0)
+            {
+                pictureBox1.Visible = true;
+                count++;
+            }
+            else if (count == 1)
+            {
+                pictureBox2.Visible = true;
+                //pictureBox7.Visible = true;
+                count++;
+            }
+            else if (count == 2)
+            {
+                pictureBox3.Visible = true;
+                //pictureBox6.Visible = true;
+                count++;
+            }
+            else if (count == 3)
+            {
+                pictureBox4.Visible = true;
+                //pictureBox5.Visible = true;
+                count = 0;
+            }
             return true;
         }
         bool PlayerWantsStand()
@@ -325,7 +327,7 @@ namespace BlackJackV1
         {
             while (true)
             {
-                if (player.IsBust())
+                if (player.IsBust()) // if true bust; returns wrong bool value IsBust() logic doesn't work
                 {
                     MessageBox.Show("You busted. :( ");
                     return true;
@@ -335,10 +337,10 @@ namespace BlackJackV1
                     if (PlayerWantsHit())
                     {
                         var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
-                        Console.WriteLine($"You were dealt a {playerCard} and now have {player.Score}");
+                        label1.Text = ($"You were dealt a {playerCard} and now have {player.Score}");
 
                     }
-                    else
+                    if (PlayerWantsStand())
                     {
                         // No bust
                         return false;
@@ -351,7 +353,7 @@ namespace BlackJackV1
             while (dealer.Score < g_minimumDealerScore)
             {
                 int dealerCard = dealer.DrawCard(deck);
-                Console.WriteLine("The dealer turned up a " + dealerCard + " and now has " + dealer.Score);
+                label2.Text = ("The dealer turned up a " + dealerCard + " and now has " + dealer.Score);
             }
 
             if (dealer.IsBust())
@@ -363,17 +365,20 @@ namespace BlackJackV1
         }
 
         bool PlayBlackjack(Deck deck)
-        {
+
+        { 
+            
             Player dealer = new Player();
             dealer.DrawCard(deck);
+            pictureBox8.Visible = true;
 
-            Console.WriteLine("The dealer is showing: " + dealer.Score); // rewrite to display pictures instead of this or next comment
+            textBox2.Text = ("dealer: " + dealer.Score); // on second thought it's actually useful keep it
 
             Player player = new Player();
             player.DrawCard(deck); // should show the pictures when draws the card
             player.DrawCard(deck);
-
-            Console.WriteLine("You have: " + player.Score); // redundant
+            textBox1.Text = ("player: " + player.Score); // 
+            Thread.Sleep(3000);
 
             if (PlayerTurn(deck, player))
             {
@@ -389,7 +394,17 @@ namespace BlackJackV1
         }
         //private void FormShown(object sender, EventArgs e)
         //{
-            
+
         //}
+
+        private void button2_MouseClick(object sender, MouseEventArgs e)
+        {
+            PlayerWantsHit(); // doesn't do anything as it only returns a bool should call it with deck
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PlayerWantsStand(); // doesn't do anything as it only returns a bool should call it with decks
+        }
     }
 }

@@ -41,7 +41,8 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -131,6 +132,7 @@
             this.pictureBox8.Size = new System.Drawing.Size(80, 140);
             this.pictureBox8.TabIndex = 4;
             this.pictureBox8.TabStop = false;
+            this.pictureBox8.Visible = false;
             // 
             // button1
             // 
@@ -156,7 +158,6 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Hit";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             this.button2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button2_MouseClick);
             // 
             // pictureBox9
@@ -184,13 +185,21 @@
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 12;
             // 
-            // comboBox1
+            // label1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(426, 62);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 13;
+            this.label1.Location = new System.Drawing.Point(709, 422);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 100);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(720, 138);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(200, 100);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "label2";
             // 
             // Form1
             // 
@@ -200,7 +209,8 @@
             this.BackgroundImage = global::BlackJackV1.Properties.Resources.gamescreenbg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1117, 690);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox9);
@@ -245,6 +255,7 @@
         private PictureBox pictureBox9;
         private TextBox textBox1;
         private TextBox textBox2;
-        private ComboBox comboBox1;
+        private Label label1;
+        private Label label2;
     }
 }
