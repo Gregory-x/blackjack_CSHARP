@@ -6,6 +6,7 @@
                   // PlayerWStand and PlayerWantsHit 
                   // Somehow player.score is wrong ALWAYS resulting in busts
                   // first runs everything before loading in the form like wtf not supposed to do that
+                  // something is very wrong with the texts in the labels meaning there is a mistake on the way of getting there
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
