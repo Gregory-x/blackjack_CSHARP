@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,8 +42,9 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(387, 380);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Blackjack\r\n\r\nI assume you know how to play blackjack but if not\r\ncheck it out her" +
-    "e: \r\n\r\nCredits: Bihari Daniel Gergo, Kurcz Daniel";
+            this.label1.Text = "                                        Blackjack\r\n\r\nI assume you know how to pla" +
+    "y blackjack but if not\r\ncheck it out here: \r\n\r\nCredits: Bihari Daniel Gergo, Kur" +
+    "cz Daniel";
             // 
             // linkLabel1
             // 
@@ -66,11 +68,23 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(-7, -3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 50);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "RETURN";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // HelpScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 633);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
@@ -87,5 +101,6 @@
         private Label label1;
         private LinkLabel linkLabel1;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }

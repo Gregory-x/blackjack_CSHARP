@@ -389,6 +389,7 @@ namespace BlackJackV1
         private void button3_Click(object sender, EventArgs e)
         {
             stillPlaying = false;
+            this.Close();
         }
 
         private void HitClicked(object sender, EventArgs e)

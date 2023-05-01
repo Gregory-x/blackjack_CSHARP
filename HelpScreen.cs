@@ -27,5 +27,10 @@ namespace BlackJackV1
         {
             Process.Start("https://www.blackjack.org/blackjack/how-to-play/");
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

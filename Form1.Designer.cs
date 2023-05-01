@@ -203,11 +203,12 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(232, 305);
+            this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.Location = new System.Drawing.Point(-1, -1);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(150, 75);
             this.button3.TabIndex = 15;
-            this.button3.Text = "button3";
+            this.button3.Text = "RETURN";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
