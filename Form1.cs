@@ -7,6 +7,8 @@
                   // Somehow player.score is wrong ALWAYS resulting in busts
                   // first runs everything before loading in the form like wtf not supposed to do that
                   // something is very wrong with the texts in the labels meaning there is a mistake on the way of getting there
+                  // Main problems: automatically draws 2 cards and a 3rd one for player;
+                  // doesn't wait for hit or stand it just plays it with 2 cards for the player aka it always stands not waiting for input
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,38 +31,16 @@ namespace BlackJackV1
         // Minimum score that the dealer has to have.
         const int g_minimumDealerScore = 17;
 
+        const int initial_Number = 0;
+
         // default settings
         int count = 0;
+        private bool? playerWantsHit = null;
 
         public Form1()
         { 
             InitializeComponent();
-            textBox1.Text = "";
-            textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
-            Deck deck = new Deck();
-            deck.Shuffle();
-            //await Task.Delay(2000);
-
-            if (PlayBlackjack(deck)) // if true you win else you've lost
-            {
-                MessageBox.Show("You win!");
-                // should loop the play Blackjack until the user presses on the back to main menu arrow
-            }
-            else
-            {
-                MessageBox.Show("You lose!");
-                // should loop the play Blackjack until the user presses on the back to main menu arrow
-            }
-
-            // Equivalent of return 0; in C++
-            //Environment.Exit(0);
         }
-
-
-       
-
         class Card
         {
             public enum Rank
@@ -294,36 +274,37 @@ namespace BlackJackV1
 
         bool PlayerWantsHit()
         {
-            //Takes care of the visuals (visible property of the cards)
-            if (count == 0)
+            while (true)
             {
-                pictureBox1.Visible = true;
-                count++;
+                //Takes care of the visuals (visible property of the cards)
+                if (count == 1)
+                {
+                    pictureBox3.Visible = true;
+                    //pictureBox6.Visible = true;
+                    count++;
+                }
+                else if (count == 2)
+                {
+                    pictureBox4.Visible = true;
+                    //pictureBox5.Visible = true;
+                    count = 0;
+                }
+                    // Display the prompt message in the label
+
+                    // Reset the playerWantsHit flag
+                    playerWantsHit = null;
+
+                    // Wait for the player to click one of the buttons
+                    while (playerWantsHit == null)
+                    {
+                        Application.DoEvents();
+                    }
+
+                // Return the value of the playerWantsHit flag
+                return playerWantsHit == true;
             }
-            else if (count == 1)
-            {
-                pictureBox2.Visible = true;
-                //pictureBox7.Visible = true;
-                count++;
-            }
-            else if (count == 2)
-            {
-                pictureBox3.Visible = true;
-                //pictureBox6.Visible = true;
-                count++;
-            }
-            else if (count == 3)
-            {
-                pictureBox4.Visible = true;
-                //pictureBox5.Visible = true;
-                count = 0;
-            }
-            return true;
         }
-        bool PlayerWantsStand()
-        {
-            return false;
-        }
+      
         bool PlayerTurn(Deck deck, Player player)
         {
             while (true)
@@ -335,13 +316,13 @@ namespace BlackJackV1
                 }
                 else
                 {
-                    if (PlayerWantsHit())
+                    if (PlayerWantsHit()) // should not come in here until the user presses on the PlayerWantsHit function; player always wants hit cus it always returns true
                     {
                         var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
-                        label1.Text = ($"You were dealt a {playerCard} and now have {player.Score}");
+                        label1.Text = ($"You were dealt a {playerCard} and now have {player.Score}"); // predicts the next card
 
                     }
-                    if (PlayerWantsStand())
+                    else
                     {
                         // No bust
                         return false;
@@ -379,8 +360,7 @@ namespace BlackJackV1
             player.DrawCard(deck); // should show the pictures when draws the card
             player.DrawCard(deck);
             textBox1.Text = ("player: " + player.Score); // 
-            Thread.Sleep(3000);
-
+            Thread.Sleep(500);
             if (PlayerTurn(deck, player))
             {
                 return false;
@@ -400,12 +380,44 @@ namespace BlackJackV1
 
         private void button2_MouseClick(object sender, MouseEventArgs e)
         {
-            PlayerWantsHit(); // doesn't do anything as it only returns a bool should call it with deck
+            //PlayerWantsHit(); // doesn't do anything as it only returns a bool should call it with deck
+            //number2 += 1;
+            playerWantsHit = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PlayerWantsStand(); // doesn't do anything as it only returns a bool should call it with decks
+            // doesn't do anything as it only returns a bool should call it with decks
+            playerWantsHit = false;
+        }
+
+        private void FormLoaded(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
+           
+
+            Deck deck = new Deck();
+            deck.Shuffle();
+            //await Task.Delay(2000);
+
+            if (PlayBlackjack(deck)) // if true you win else you've lost
+            {
+                MessageBox.Show("You win!");
+                // should loop the play Blackjack until the user presses on the back to main menu arrow
+            }
+            else
+            {
+                MessageBox.Show("You lose!");
+                // should loop the play Blackjack until the user presses on the back to main menu arrow
+            }
+
+            // Equivalent of return 0; in C++
+            //Environment.Exit(0);
         }
     }
 }
