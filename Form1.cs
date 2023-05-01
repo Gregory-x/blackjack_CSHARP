@@ -34,13 +34,21 @@ namespace BlackJackV1
         const int initial_Number = 0;
 
         // default settings
-        int count = 0;
+        private int player_cardCount = 0;
+        private int dealer_cardCount = 0;
         private bool? playerWantsHit = null;
+        private bool stillPlaying = false;
 
         public Form1()
         { 
             InitializeComponent();
-           
+            textBox1.Text = "";
+            textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
+            pictureBox8.Visible = true;
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
         }
         class Card
         {
@@ -277,21 +285,7 @@ namespace BlackJackV1
         {
             while (true)
             {
-                //Takes care of the visuals (visible property of the cards)
-                if (count == 1)
-                {
-                    pictureBox3.Visible = true;
-                    //pictureBox6.Visible = true;
-                    count++;
-                }
-                else if (count == 2)
-                {
-                    pictureBox4.Visible = true;
-                    //pictureBox5.Visible = true;
-                    count = 0;
-                }
-                    // Display the prompt message in the label
-
+   
                     // Reset the playerWantsHit flag
                     playerWantsHit = null;
 
@@ -319,9 +313,16 @@ namespace BlackJackV1
                 {
                     if (PlayerWantsHit()) // should not come in here until the user presses on the PlayerWantsHit function; player always wants hit cus it always returns true
                     {
+                        player_cardCount++;
+                        switch (player_cardCount)
+                        {
+                            case 1:
+                                pictureBox3.Visible = true; break;
+                            case 2:
+                                pictureBox4.Visible = true; break;
+                        }
                         var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
-                        textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard} 
-
+                        textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard
                     }
                     else
                     {
@@ -335,8 +336,18 @@ namespace BlackJackV1
         {
             while (dealer.Score < g_minimumDealerScore)
             {
+                dealer_cardCount++;
+                switch (dealer_cardCount)
+                {
+                    case 1:
+                        pictureBox7.Visible = true; break;
+                    case 2:
+                        pictureBox6.Visible = true; break;
+                    case 3:
+                        pictureBox5.Visible = true; break;
+                }
                 int dealerCard = dealer.DrawCard(deck);
-                label2.Text = ("The dealer turned up a " + dealerCard + " and now has " + dealer.Score);
+                textBox2.Text = ("dealer: " + dealer.Score);
             }
 
             if (dealer.IsBust())
@@ -353,7 +364,6 @@ namespace BlackJackV1
             
             Player dealer = new Player();
             dealer.DrawCard(deck);
-            pictureBox8.Visible = true;
 
             textBox2.Text = ("dealer: " + dealer.Score); // on second thought it's actually useful keep it
 
@@ -374,40 +384,11 @@ namespace BlackJackV1
 
             return (player.Score > dealer.Score);
         }
-        private void FormLoaded(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = true;
-            // Equivalent of return 0; in C++
-            //Environment.Exit(0);
-        }
+        
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Deck deck = new Deck();
-            deck.Shuffle();
-            //await Task.Delay(2000);
-
-            if (PlayBlackjack(deck)) // if true you win else you've lost
-            {
-                MessageBox.Show("You win!");
-                // should loop the play Blackjack until the user presses on the back to main menu arrow
-            }
-            else
-            {
-                MessageBox.Show("You lose!");
-              
-                // should loop the play Blackjack until the user presses on the back to main menu arrow
-            }
-            Thread.Sleep(1000);
-            textBox1.Text = "";
-            textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
+            stillPlaying = false;
         }
 
         private void HitClicked(object sender, EventArgs e)
@@ -418,6 +399,44 @@ namespace BlackJackV1
         private void StandClicked(object sender, EventArgs e)
         {
             playerWantsHit = false;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            stillPlaying = true;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            while(stillPlaying)
+            {
+                Deck deck = new Deck();
+                deck.Shuffle();
+                dealer_cardCount = 0;
+                player_cardCount = 0;
+
+                if (PlayBlackjack(deck)) // if true you win else you've lost
+                {
+                    MessageBox.Show("You win!");
+                    // should loop the play Blackjack until the user presses on the back to main menu arrow
+                }
+                else
+                {
+                    MessageBox.Show("You lose!");
+
+                    // should loop the play Blackjack until the user presses on the back to main menu arrow
+                }
+                textBox1.Text = "";
+                textBox2.Text = "";
+                label1.Text = "";
+                label2.Text = "";
+                pictureBox7.Visible = false;
+                pictureBox6.Visible = false;
+                pictureBox5.Visible = false;   
+                pictureBox4.Visible = false;
+                pictureBox3.Visible = false;
+                Thread.Sleep(1000);
+            }
         }
     }
 }
