@@ -43,6 +43,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -62,7 +63,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(80, 140);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
             // 
             // pictureBox2
             // 
@@ -72,7 +72,6 @@
             this.pictureBox2.Size = new System.Drawing.Size(80, 140);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
             // 
             // pictureBox3
             // 
@@ -132,7 +131,6 @@
             this.pictureBox8.Size = new System.Drawing.Size(80, 140);
             this.pictureBox8.TabIndex = 4;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Visible = false;
             // 
             // button1
             // 
@@ -145,7 +143,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Stand";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.StandClicked);
             // 
             // button2
             // 
@@ -158,7 +156,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Hit";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button2_MouseClick);
+            this.button2.Click += new System.EventHandler(this.HitClicked);
             // 
             // pictureBox9
             // 
@@ -201,6 +199,16 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "label2";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(232, 305);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -209,6 +217,7 @@
             this.BackgroundImage = global::BlackJackV1.Properties.Resources.gamescreenbg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1117, 690);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -258,5 +267,6 @@
         private TextBox textBox2;
         private Label label1;
         private Label label2;
+        private Button button3;
     }
 }

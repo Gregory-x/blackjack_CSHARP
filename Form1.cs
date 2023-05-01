@@ -40,6 +40,12 @@ namespace BlackJackV1
         public Form1()
         { 
             InitializeComponent();
+            textBox1.Text = "";
+            textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
         }
         class Card
         {
@@ -373,34 +379,19 @@ namespace BlackJackV1
 
             return (player.Score > dealer.Score);
         }
-        //private void FormShown(object sender, EventArgs e)
-        //{
-
-        //}
-
-        private void button2_MouseClick(object sender, MouseEventArgs e)
-        {
-            //PlayerWantsHit(); // doesn't do anything as it only returns a bool should call it with deck
-            //number2 += 1;
-            playerWantsHit = true;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // doesn't do anything as it only returns a bool should call it with decks
-            playerWantsHit = false;
-        }
-
         private void FormLoaded(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = true;
+          
            
 
+            
+
+            // Equivalent of return 0; in C++
+            //Environment.Exit(0);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
             Deck deck = new Deck();
             deck.Shuffle();
             //await Task.Delay(2000);
@@ -415,9 +406,16 @@ namespace BlackJackV1
                 MessageBox.Show("You lose!");
                 // should loop the play Blackjack until the user presses on the back to main menu arrow
             }
+        }
 
-            // Equivalent of return 0; in C++
-            //Environment.Exit(0);
+        private void HitClicked(object sender, EventArgs e)
+        {
+            playerWantsHit = true;
+        }
+
+        private void StandClicked(object sender, EventArgs e)
+        {
+            playerWantsHit = false;
         }
     }
 }
