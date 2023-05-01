@@ -40,12 +40,7 @@ namespace BlackJackV1
         public Form1()
         { 
             InitializeComponent();
-            textBox1.Text = "";
-            textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = true;
+           
         }
         class Card
         {
@@ -325,7 +320,7 @@ namespace BlackJackV1
                     if (PlayerWantsHit()) // should not come in here until the user presses on the PlayerWantsHit function; player always wants hit cus it always returns true
                     {
                         var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
-                        label1.Text = ($"You were dealt a {playerCard} and now have {player.Score}"); // predicts the next card
+                        textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard} 
 
                     }
                     else
@@ -381,11 +376,12 @@ namespace BlackJackV1
         }
         private void FormLoaded(object sender, EventArgs e)
         {
-          
-           
-
-            
-
+            textBox1.Text = "";
+            textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
             // Equivalent of return 0; in C++
             //Environment.Exit(0);
         }
@@ -404,8 +400,14 @@ namespace BlackJackV1
             else
             {
                 MessageBox.Show("You lose!");
+              
                 // should loop the play Blackjack until the user presses on the back to main menu arrow
             }
+            Thread.Sleep(1000);
+            textBox1.Text = "";
+            textBox2.Text = "";
+            label1.Text = "";
+            label2.Text = "";
         }
 
         private void HitClicked(object sender, EventArgs e)
