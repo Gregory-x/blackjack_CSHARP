@@ -1,6 +1,7 @@
 // To do:           // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
                     // animate the getting cards 
                     // Errors: displaying the wrong cards.
+                    // works only for the first time after a change so we have to set something to 0
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace BlackJackV1
         private int dealer_cardCount = 0;
         private bool? playerWantsHit = null;
         private bool stillPlaying = false;
+
 
         public Form1()
         { 
@@ -164,20 +166,22 @@ namespace BlackJackV1
                 m_cardIndex = 0;
             }
 
-            public Card DealCard()
+            public Card DealCard() // type card
             {
                 if (m_cardIndex >= m_deck.Count)
                 {
                     throw new InvalidOperationException("No more cards in the deck.");
                 }
-                
+                Card dealtCard = m_deck[m_cardIndex]; // saves the card
                 return m_deck[m_cardIndex++];
             }
+       
         }
         class Player
         {
             private int m_score;
-
+            private Card m_currentCard;
+            // list which has all the players' cards
             public Player()
             {
                 m_score = 0;
@@ -185,7 +189,8 @@ namespace BlackJackV1
 
             public int DrawCard(Deck deck)
             {
-                int value = deck.DealCard().Value();
+                m_currentCard = deck.DealCard();
+                int value = m_currentCard.Value();
                 m_score += value;
                 return value;
             }
@@ -198,6 +203,14 @@ namespace BlackJackV1
             public bool IsBust() // only bust if m_score > g_maximumScore is a true inequality
             {
                 return (m_score > g_maximumScore);
+            }
+            public Card CurrentCard
+            {
+                //Card dealtCard = m_deck[m_cardIndex]; // saves the card
+                //return dealtCard;
+                //return m_deck[m_cardIndex]; // saves the card
+                get { return m_currentCard; }
+
             }
         }
         // end of classes and start of member and just functions
@@ -238,14 +251,14 @@ namespace BlackJackV1
                             case 1:
                                 {
                                     pictureBox3.Visible = true;
-                                    string imagePath = deck.DealCard().GetImagePath();
+                                    string imagePath = player.CurrentCard.GetImagePath(); // not the current card, this just deals a random other card so the score and the displayed image of the card will not match
                                     pictureBox3.Image = Image.FromFile(imagePath);
                                     break;
                                 }
                             case 2:
                                 {
                                     pictureBox4.Visible = true;
-                                    string imagePath = deck.DealCard().GetImagePath();
+                                    string imagePath = player.CurrentCard.GetImagePath();
                                     pictureBox4.Image = Image.FromFile(imagePath);
                                     break;
                                 }
@@ -275,7 +288,7 @@ namespace BlackJackV1
                             // our current card :                                 return m_deck[m_cardIndex++];
                             //                 int value = deck.DealCard().Value(); the current card if not mistaken
                             pictureBox7.Visible = true;
-                            string imagePath = deck.DealCard().GetImagePath();
+                            string imagePath = dealer.CurrentCard.GetImagePath();
                             pictureBox7.Image = Image.FromFile(imagePath);
                             break;
                         }
@@ -284,14 +297,14 @@ namespace BlackJackV1
                         {
 
                             pictureBox6.Visible = true;
-                            string imagePath = deck.DealCard().GetImagePath();
+                            string imagePath = dealer.CurrentCard.GetImagePath();
                             pictureBox6.Image = Image.FromFile(imagePath);
                             break;
                         }
                     case 3:
                         {
                             pictureBox5.Visible = true;
-                            string imagePath = deck.DealCard().GetImagePath();
+                            string imagePath = dealer.CurrentCard.GetImagePath();
                             pictureBox5.Image = Image.FromFile(imagePath);
                             break;
                         }
@@ -312,16 +325,16 @@ namespace BlackJackV1
             
             Player dealer = new Player();
             dealer.DrawCard(deck);
-            string imagePath = deck.DealCard().GetImagePath();
+            string imagePath = dealer.CurrentCard.GetImagePath();
             pictureBox8.Image = Image.FromFile(imagePath);
             textBox2.Text = ("dealer: " + dealer.Score); // on second thought it's actually useful keep it
             Player player = new Player();
             player.DrawCard(deck); // should show the pictures when draws the card
-            //string imagePath2 = deck.DealCard().GetImagePath();
-            //pictureBox1.Image = Image.FromFile(imagePath2);
+            string imagePath2 = player.CurrentCard.GetImagePath();
+            pictureBox1.Image = Image.FromFile(imagePath2);
             player.DrawCard(deck);
-            //string imagePath3 = deck.DealCard().GetImagePath();
-            //pictureBox2.Image = Image.FromFile(imagePath3);
+            string imagePath3 = player.CurrentCard.GetImagePath();
+            pictureBox2.Image = Image.FromFile(imagePath3);
             textBox1.Text = ("player: " + player.Score); // 
             Thread.Sleep(500);
             if (PlayerTurn(deck, player))
@@ -370,7 +383,6 @@ namespace BlackJackV1
                 else
                 {
                     MessageBox.Show("You lose!");
-
                     // should loop the play Blackjack until the user presses on the back to main menu arrow
                 }
                 textBox1.Text = "";
