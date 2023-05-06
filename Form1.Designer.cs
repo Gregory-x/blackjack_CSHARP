@@ -61,6 +61,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(381, 382);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -70,6 +71,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(438, 382);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
@@ -79,6 +81,7 @@
             this.pictureBox3.Location = new System.Drawing.Point(494, 382);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Visible = false;
@@ -89,6 +92,7 @@
             this.pictureBox4.Location = new System.Drawing.Point(552, 382);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Visible = false;
@@ -99,6 +103,7 @@
             this.pictureBox5.Location = new System.Drawing.Point(552, 108);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 7;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Visible = false;
@@ -109,6 +114,7 @@
             this.pictureBox6.Location = new System.Drawing.Point(494, 108);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 6;
             this.pictureBox6.TabStop = false;
             this.pictureBox6.Visible = false;
@@ -119,6 +125,7 @@
             this.pictureBox7.Location = new System.Drawing.Point(438, 108);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 5;
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Visible = false;
@@ -129,6 +136,7 @@
             this.pictureBox8.Location = new System.Drawing.Point(381, 108);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(80, 140);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 4;
             this.pictureBox8.TabStop = false;
             // 
@@ -191,7 +199,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 100);
             this.label1.TabIndex = 13;
-            this.label1.Text = "label1";
             // 
             // label2
             // 
@@ -199,7 +206,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(200, 100);
             this.label2.TabIndex = 14;
-            this.label2.Text = "label2";
             // 
             // button3
             // 

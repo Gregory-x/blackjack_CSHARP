@@ -1,14 +1,6 @@
-// To do:         // fnc to decide if textbox1 gets the text or textbox2 which is the dealer's score
-                  // a way to implement pictures being shown in the Print() func and displaying current score in textBox1 -> player
-                  // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
-                  // dynamic allocated pictures for the cards?
-                  // animate the getting cards thingy
-                  // PlayerWStand and PlayerWantsHit 
-                  // Somehow player.score is wrong ALWAYS resulting in busts
-                  // first runs everything before loading in the form like wtf not supposed to do that
-                  // something is very wrong with the texts in the labels meaning there is a mistake on the way of getting there
-                  // Main problems: automatically draws 2 cards and a 3rd one for player;
-                  // doesn't wait for hit or stand it just plays it with 2 cards for the player aka it always stands not waiting for input
+// To do:           // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
+                    // animate the getting cards 
+                    // Errors: displaying the wrong cards.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net.Security;
 
 namespace BlackJackV1
 {
@@ -73,90 +66,32 @@ namespace BlackJackV1
 
             public enum Suit
             {
-                Club,
-                Diamond,
-                Heart,
-                Spade,
+                Clubs,
+                Diamonds,
+                Hearts,
+                Spades,
 
                 MaxSuits
             }
 
-            public Rank rank;
-            public Suit suit;
-
+            private Rank rank;
+            private Suit suit;
+            public Card()
+            {
+            }
             public Card(Rank rank, Suit suit)
             {
                 this.rank = rank;
                 this.suit = suit;
             }
-            
-            public void Print() // should be replaced by pictures 
-            {
-                switch (rank)
-                {
-                    case Rank.Rank2:
-                        Console.Write("2");
-                        break;
-                    case Rank.Rank3:
-                        Console.Write("3");
-                        break;
-                    case Rank.Rank4:
-                        Console.Write("4");
-                        break;
-                    case Rank.Rank5:
-                        Console.Write("5");
-                        break;
-                    case Rank.Rank6:
-                        Console.Write("6");
-                        break;
-                    case Rank.Rank7:
-                        Console.Write("7");
-                        break;
-                    case Rank.Rank8:
-                        Console.Write("8");
-                        break;
-                    case Rank.Rank9:
-                        Console.Write("9");
-                        break;
-                    case Rank.Rank10:
-                        Console.Write("T");
-                        break;
-                    case Rank.RankJack:
-                        Console.Write("J");
-                        break;
-                    case Rank.RankQueen:
-                        Console.Write("Q");
-                        break;
-                    case Rank.RankKing:
-                        Console.Write("K");
-                        break;
-                    case Rank.RankAce:
-                        Console.Write("A");
-                        break;
-                    default:
-                        Console.Write("?");
-                        break;
-                }
 
-                switch (suit)
-                {
-                    case Suit.Club:
-                        Console.Write("C");
-                        break;
-                    case Suit.Diamond:
-                        Console.Write("D");
-                        break;
-                    case Suit.Heart:
-                        Console.Write("H");
-                        break;
-                    case Suit.Spade:
-                        Console.Write("S");
-                        break;
-                    default:
-                        Console.Write("?");
-                        break;
-                }
+            public string GetImagePath() // This version uses string interpolation to construct the file path based on the current suit and rank values. It first converts the suit and rank enums to lowercase strings, then combines them using string interpolation to create the file path. This approach removes the need for the large switch statement.
+            {
+                string suitName = suit.ToString().ToLower();
+                string rankName = rank.ToString().ToLower();
+                return $"../../../images/cards/{rankName}_of_{suitName}.png";
             }
+
             public int Value() // textBox value static casted to String?
             {
                 switch (rank)
@@ -204,7 +139,7 @@ namespace BlackJackV1
 
             public Deck()
             {
-                int index = 0;
+               int index = 0;
 
                 for (int suit = 0; suit < (int)Card.Suit.MaxSuits; ++suit)
                 {
@@ -215,18 +150,6 @@ namespace BlackJackV1
                     }
                 }
             }
-
-            public void Print()
-            {
-                foreach (var card in m_deck)
-                {
-                    card.Print();
-                    Console.Write(' ');
-                }
-
-                Console.WriteLine();
-            }
-
             public void Shuffle()
             {
                 Random rand = new Random();
@@ -247,12 +170,10 @@ namespace BlackJackV1
                 {
                     throw new InvalidOperationException("No more cards in the deck.");
                 }
-
+                
                 return m_deck[m_cardIndex++];
             }
         }
-
-
         class Player
         {
             private int m_score;
@@ -280,7 +201,6 @@ namespace BlackJackV1
             }
         }
         // end of classes and start of member and just functions
-
         bool PlayerWantsHit()
         {
             while (true)
@@ -299,7 +219,6 @@ namespace BlackJackV1
                 return playerWantsHit == true;
             }
         }
-      
         bool PlayerTurn(Deck deck, Player player)
         {
             while (true)
@@ -317,9 +236,19 @@ namespace BlackJackV1
                         switch (player_cardCount)
                         {
                             case 1:
-                                pictureBox3.Visible = true; break;
+                                {
+                                    pictureBox3.Visible = true;
+                                    string imagePath = deck.DealCard().GetImagePath();
+                                    pictureBox3.Image = Image.FromFile(imagePath);
+                                    break;
+                                }
                             case 2:
-                                pictureBox4.Visible = true; break;
+                                {
+                                    pictureBox4.Visible = true;
+                                    string imagePath = deck.DealCard().GetImagePath();
+                                    pictureBox4.Image = Image.FromFile(imagePath);
+                                    break;
+                                }
                         }
                         var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
                         textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard
@@ -337,16 +266,36 @@ namespace BlackJackV1
             while (dealer.Score < g_minimumDealerScore)
             {
                 dealer_cardCount++;
+                int dealerCard = dealer.DrawCard(deck); // got to do with drawing the card itself(score) so also with GetImagePath()
                 switch (dealer_cardCount)
                 {
                     case 1:
-                        pictureBox7.Visible = true; break;
+                        {
+                            //var program = new Program();
+                            // our current card :                                 return m_deck[m_cardIndex++];
+                            //                 int value = deck.DealCard().Value(); the current card if not mistaken
+                            pictureBox7.Visible = true;
+                            string imagePath = deck.DealCard().GetImagePath();
+                            pictureBox7.Image = Image.FromFile(imagePath);
+                            break;
+                        }
+                        
                     case 2:
-                        pictureBox6.Visible = true; break;
+                        {
+
+                            pictureBox6.Visible = true;
+                            string imagePath = deck.DealCard().GetImagePath();
+                            pictureBox6.Image = Image.FromFile(imagePath);
+                            break;
+                        }
                     case 3:
-                        pictureBox5.Visible = true; break;
+                        {
+                            pictureBox5.Visible = true;
+                            string imagePath = deck.DealCard().GetImagePath();
+                            pictureBox5.Image = Image.FromFile(imagePath);
+                            break;
+                        }
                 }
-                int dealerCard = dealer.DrawCard(deck);
                 textBox2.Text = ("dealer: " + dealer.Score);
             }
 
@@ -357,19 +306,22 @@ namespace BlackJackV1
             }
             return false;
         }
-
         bool PlayBlackjack(Deck deck)
 
         { 
             
             Player dealer = new Player();
             dealer.DrawCard(deck);
-
+            string imagePath = deck.DealCard().GetImagePath();
+            pictureBox8.Image = Image.FromFile(imagePath);
             textBox2.Text = ("dealer: " + dealer.Score); // on second thought it's actually useful keep it
-
             Player player = new Player();
             player.DrawCard(deck); // should show the pictures when draws the card
+            //string imagePath2 = deck.DealCard().GetImagePath();
+            //pictureBox1.Image = Image.FromFile(imagePath2);
             player.DrawCard(deck);
+            //string imagePath3 = deck.DealCard().GetImagePath();
+            //pictureBox2.Image = Image.FromFile(imagePath3);
             textBox1.Text = ("player: " + player.Score); // 
             Thread.Sleep(500);
             if (PlayerTurn(deck, player))
@@ -384,29 +336,23 @@ namespace BlackJackV1
 
             return (player.Score > dealer.Score);
         }
-        
-
         private void button3_Click(object sender, EventArgs e)
         {
             stillPlaying = false;
             this.Close();
         }
-
         private void HitClicked(object sender, EventArgs e)
         {
             playerWantsHit = true;
         }
-
         private void StandClicked(object sender, EventArgs e)
         {
             playerWantsHit = false;
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             stillPlaying = true;
         }
-
         private void Form1_Shown(object sender, EventArgs e)
         {
             while(stillPlaying)
