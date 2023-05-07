@@ -23,14 +23,33 @@ namespace BlackJackV1
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://www.blackjack.org/blackjack/how-to-play/");
-        }
+       
+            private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+            {
+                try
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.UseShellExecute = true;
+                    psi.FileName = "https://www.blackjack.org/blackjack/how-to-play/";
+                    Process.Start(psi);
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception here, e.g. display an error message
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
