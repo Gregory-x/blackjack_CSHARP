@@ -181,6 +181,11 @@ namespace BlackJackV1
             {
                 return (m_score > g_maximumScore);
             }
+            public bool HasBlackjack()
+            {
+                if(m_score == g_maximumScore) return true;
+                else return false;
+            }
             public Card CurrentCard
             {
                 //Card dealtCard = m_deck[m_cardIndex]; // saves the card
@@ -208,10 +213,15 @@ namespace BlackJackV1
         {
             while (true)
             {
+               
                 if (player.IsBust()) // if true bust; returns wrong bool value IsBust() logic doesn't work
                 {
                     MessageBox.Show("You busted. :( ");
                     return true;
+                }
+                if (player.HasBlackjack())
+                {
+                    return false;
                 }
                 else
                 {
@@ -287,6 +297,10 @@ namespace BlackJackV1
                 MessageBox.Show("The dealer busted!");
                 return true;
             }
+            if (dealer.HasBlackjack())
+            {
+                return false;
+            }
             return false;
         }
         bool PlayBlackjack(Deck deck)
@@ -343,15 +357,19 @@ namespace BlackJackV1
 
                 if (PlayBlackjack(deck)) // if true you win else you've lost
                 {
+                    textBox3.Visible = true;
+                    textBox3.ForeColor = Color.Green;
+                    textBox3.Text = "WIN";
                     MessageBox.Show("You win!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
-                    //textBox3.Visible = true;
-                    //textBox3.Text = "WIN";
+                    //Thread.Sleep(100);
                 }
                 else
                 {
+                    textBox3.Visible = true;
+                    textBox3.ForeColor = Color.Red;
+                    textBox3.Text = "LOSS";
                     MessageBox.Show("You lose!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
-                    //textBox3.Visible = true;
-                    //textBox3.Text = "LOSS";
+                    //Thread.Sleep(100);
                 }
                 textBox1.Text = "";
                 textBox2.Text = "";
