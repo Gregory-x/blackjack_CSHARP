@@ -41,9 +41,8 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -179,7 +178,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(438, 528);
+            this.textBox1.Location = new System.Drawing.Point(459, 528);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 11;
@@ -193,30 +192,30 @@
             this.textBox2.TabIndex = 12;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(709, 422);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 100);
-            this.label1.TabIndex = 13;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(720, 138);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(200, 100);
-            this.label2.TabIndex = 14;
-            // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.Color.Cyan;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(-1, -1);
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(15);
             this.button3.Size = new System.Drawing.Size(150, 75);
             this.button3.TabIndex = 15;
             this.button3.Text = "RETURN";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.DarkGray;
+            this.textBox3.Location = new System.Drawing.Point(381, 472);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(251, 23);
+            this.textBox3.TabIndex = 16;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.Visible = false;
             // 
             // Form1
             // 
@@ -226,9 +225,8 @@
             this.BackgroundImage = global::BlackJackV1.Properties.Resources.gamescreenbg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1117, 690);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox9);
@@ -275,8 +273,7 @@
         private PictureBox pictureBox9;
         private TextBox textBox1;
         private TextBox textBox2;
-        private Label label1;
-        private Label label2;
         private Button button3;
+        private TextBox textBox3;
     }
 }

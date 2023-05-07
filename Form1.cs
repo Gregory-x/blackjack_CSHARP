@@ -1,7 +1,7 @@
 // To do:           // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
                     // animate the getting cards 
-                    // Errors: displaying the wrong cards.
-                    // works only for the first time after a change so we have to set something to 0
+                    // Errors: displaying the wrong cards. : DONE
+                    // works only for the first time after a change so we have to set something to 0 : DONE
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,28 +19,19 @@ namespace BlackJackV1
     
     public partial class Form1 : Form
     {
-        // Maximum score before losing.
-        const int g_maximumScore = 21;
-
-        // Minimum score that the dealer has to have.
-        const int g_minimumDealerScore = 17;
-
-        const int initial_Number = 0;
-
         // default settings
         private int player_cardCount = 0;
         private int dealer_cardCount = 0;
         private bool? playerWantsHit = null;
         private bool stillPlaying = false;
-
-
+        const int g_maximumScore = 21;        // Maximum score before losing
+        const int g_minimumDealerScore = 17;
+        const int initial_Number = 0;
         public Form1()
         { 
             InitializeComponent();
             textBox1.Text = "";
             textBox2.Text = "";
-            label1.Text = "";
-            label2.Text = "";
             pictureBox8.Visible = true;
             pictureBox1.Visible = true;
             pictureBox2.Visible = true;
@@ -65,7 +56,6 @@ namespace BlackJackV1
 
                 MaxRanks
             }
-
             public enum Suit
             {
                 Clubs,
@@ -75,7 +65,6 @@ namespace BlackJackV1
 
                 MaxSuits
             }
-
             private Rank rank;
             private Suit suit;
             public Card()
@@ -86,14 +75,12 @@ namespace BlackJackV1
                 this.rank = rank;
                 this.suit = suit;
             }
-
             public string GetImagePath() // This version uses string interpolation to construct the file path based on the current suit and rank values. It first converts the suit and rank enums to lowercase strings, then combines them using string interpolation to create the file path. This approach removes the need for the large switch statement.
             {
                 string suitName = suit.ToString().ToLower();
                 string rankName = rank.ToString().ToLower();
                 return $"../../../images/cards/{rankName}_of_{suitName}.png";
             }
-
             public int Value() // textBox value static casted to String?
             {
                 switch (rank)
@@ -131,18 +118,13 @@ namespace BlackJackV1
                 }
             }
         }
-
-
         class Deck
         {
-
             private List<Card> m_deck = new List<Card>();
             private int m_cardIndex = 0;
-
             public Deck()
             {
                int index = 0;
-
                 for (int suit = 0; suit < (int)Card.Suit.MaxSuits; ++suit)
                 {
                     for (int rank = 0; rank < (int)Card.Rank.MaxRanks; ++rank)
@@ -165,7 +147,6 @@ namespace BlackJackV1
 
                 m_cardIndex = 0;
             }
-
             public Card DealCard() // type card
             {
                 if (m_cardIndex >= m_deck.Count)
@@ -175,7 +156,6 @@ namespace BlackJackV1
                 Card dealtCard = m_deck[m_cardIndex]; // saves the card
                 return m_deck[m_cardIndex++];
             }
-       
         }
         class Player
         {
@@ -186,7 +166,6 @@ namespace BlackJackV1
             {
                 m_score = 0;
             }
-
             public int DrawCard(Deck deck)
             {
                 m_currentCard = deck.DealCard();
@@ -194,12 +173,10 @@ namespace BlackJackV1
                 m_score += value;
                 return value;
             }
-
             public int Score 
             {
                 get { return m_score; }
             }
-
             public bool IsBust() // only bust if m_score > g_maximumScore is a true inequality
             {
                 return (m_score > g_maximumScore);
@@ -218,18 +195,13 @@ namespace BlackJackV1
         {
             while (true)
             {
-   
-                    // Reset the playerWantsHit flag
-                    playerWantsHit = null;
-
-                    // Wait for the player to click one of the buttons
-                    while (playerWantsHit == null)
+                    playerWantsHit = null;                     // Reset the playerWantsHit flag
+                // Wait for the player to click one of the buttons
+                while (playerWantsHit == null)
                     {
                         Application.DoEvents();
                     }
-
-                // Return the value of the playerWantsHit flag
-                return playerWantsHit == true;
+                return playerWantsHit == true;                // Return the value of the playerWantsHit flag
             }
         }
         bool PlayerTurn(Deck deck, Player player)
@@ -292,7 +264,6 @@ namespace BlackJackV1
                             pictureBox7.Image = Image.FromFile(imagePath);
                             break;
                         }
-                        
                     case 2:
                         {
 
@@ -311,7 +282,6 @@ namespace BlackJackV1
                 }
                 textBox2.Text = ("dealer: " + dealer.Score);
             }
-
             if (dealer.IsBust())
             {
                 MessageBox.Show("The dealer busted!");
@@ -320,9 +290,7 @@ namespace BlackJackV1
             return false;
         }
         bool PlayBlackjack(Deck deck)
-
         { 
-            
             Player dealer = new Player();
             dealer.DrawCard(deck);
             string imagePath = dealer.CurrentCard.GetImagePath();
@@ -341,12 +309,10 @@ namespace BlackJackV1
             {
                 return false;
             }
-
             if (DealerTurn(deck, dealer))
             {
                 return true;
             }
-
             return (player.Score > dealer.Score);
         }
         private void button3_Click(object sender, EventArgs e)
@@ -377,18 +343,20 @@ namespace BlackJackV1
 
                 if (PlayBlackjack(deck)) // if true you win else you've lost
                 {
-                    MessageBox.Show("You win!");
-                    // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    MessageBox.Show("You win!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    //textBox3.Visible = true;
+                    //textBox3.Text = "WIN";
                 }
                 else
                 {
-                    MessageBox.Show("You lose!");
-                    // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    MessageBox.Show("You lose!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    //textBox3.Visible = true;
+                    //textBox3.Text = "LOSS";
                 }
                 textBox1.Text = "";
                 textBox2.Text = "";
-                label1.Text = "";
-                label2.Text = "";
+                textBox3.Text = "";    
+                textBox3.Visible = false;
                 pictureBox7.Visible = false;
                 pictureBox6.Visible = false;
                 pictureBox5.Visible = false;   
