@@ -28,251 +28,288 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            pictureBox5 = new PictureBox();
+            pictureBox6 = new PictureBox();
+            pictureBox7 = new PictureBox();
+            pictureBox8 = new PictureBox();
+            button1 = new Button();
+            button2 = new Button();
+            pictureBox9 = new PictureBox();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            button3 = new Button();
+            textBox3 = new TextBox();
+            timer1 = new System.Windows.Forms.Timer(components);
+            label1 = new Label();
+            label2 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox1.Location = new System.Drawing.Point(381, 382);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.BackColor = Color.DarkOliveGreen;
+            pictureBox1.Location = new Point(381, 382);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(80, 140);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox2.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox2.Location = new System.Drawing.Point(438, 382);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.Anchor = AnchorStyles.None;
+            pictureBox2.BackColor = Color.DarkOliveGreen;
+            pictureBox2.Location = new Point(438, 382);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(80, 140);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox3.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox3.Location = new System.Drawing.Point(494, 382);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Visible = false;
+            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.BackColor = Color.DarkOliveGreen;
+            pictureBox3.Location = new Point(494, 382);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(80, 140);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 2;
+            pictureBox3.TabStop = false;
+            pictureBox3.Visible = false;
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox4.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox4.Location = new System.Drawing.Point(552, 382);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Visible = false;
+            pictureBox4.Anchor = AnchorStyles.None;
+            pictureBox4.BackColor = Color.DarkOliveGreen;
+            pictureBox4.Location = new Point(552, 382);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(80, 140);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 3;
+            pictureBox4.TabStop = false;
+            pictureBox4.Visible = false;
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox5.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox5.Location = new System.Drawing.Point(552, 108);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Visible = false;
+            pictureBox5.Anchor = AnchorStyles.None;
+            pictureBox5.BackColor = Color.DarkOliveGreen;
+            pictureBox5.Location = new Point(552, 108);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(80, 140);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 7;
+            pictureBox5.TabStop = false;
+            pictureBox5.Visible = false;
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox6.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox6.Location = new System.Drawing.Point(494, 108);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 6;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Visible = false;
+            pictureBox6.Anchor = AnchorStyles.None;
+            pictureBox6.BackColor = Color.DarkOliveGreen;
+            pictureBox6.Location = new Point(494, 108);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(80, 140);
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox6.TabIndex = 6;
+            pictureBox6.TabStop = false;
+            pictureBox6.Visible = false;
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox7.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox7.Location = new System.Drawing.Point(438, 108);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 5;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Visible = false;
+            pictureBox7.Anchor = AnchorStyles.None;
+            pictureBox7.BackColor = Color.DarkOliveGreen;
+            pictureBox7.Location = new Point(438, 108);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(80, 140);
+            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox7.TabIndex = 5;
+            pictureBox7.TabStop = false;
+            pictureBox7.Visible = false;
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox8.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pictureBox8.Location = new System.Drawing.Point(381, 108);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 4;
-            this.pictureBox8.TabStop = false;
+            pictureBox8.Anchor = AnchorStyles.None;
+            pictureBox8.BackColor = Color.DarkOliveGreen;
+            pictureBox8.Location = new Point(381, 108);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(80, 140);
+            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox8.TabIndex = 4;
+            pictureBox8.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(361, 570);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Stand";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.StandClicked);
+            button1.Anchor = AnchorStyles.None;
+            button1.BackColor = Color.FromArgb(192, 0, 0);
+            button1.Font = new Font("Verdana", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(361, 570);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 50);
+            button1.TabIndex = 8;
+            button1.Text = "Stand";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += StandClicked;
             // 
             // button2
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.Chartreuse;
-            this.button2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(549, 570);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 50);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Hit";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.HitClicked);
+            button2.Anchor = AnchorStyles.None;
+            button2.BackColor = Color.Chartreuse;
+            button2.Font = new Font("Verdana", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = SystemColors.ActiveCaptionText;
+            button2.Location = new Point(549, 570);
+            button2.Name = "button2";
+            button2.Size = new Size(100, 50);
+            button2.TabIndex = 9;
+            button2.Text = "Hit";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += HitClicked;
             // 
             // pictureBox9
             // 
-            this.pictureBox9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.BackgroundImage = global::BlackJackV1.Properties.Resources.bj_pays;
-            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox9.Location = new System.Drawing.Point(343, 246);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(357, 130);
-            this.pictureBox9.TabIndex = 10;
-            this.pictureBox9.TabStop = false;
+            pictureBox9.Anchor = AnchorStyles.None;
+            pictureBox9.BackColor = Color.Transparent;
+            pictureBox9.BackgroundImage = Properties.Resources.bj_pays;
+            pictureBox9.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox9.Location = new Point(343, 246);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(357, 130);
+            pictureBox9.TabIndex = 10;
+            pictureBox9.TabStop = false;
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.Location = new System.Drawing.Point(459, 528);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBox1.Anchor = AnchorStyles.None;
+            textBox1.Location = new Point(459, 528);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 11;
+            textBox1.TextAlign = HorizontalAlignment.Center;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox2.Location = new System.Drawing.Point(459, 254);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 12;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBox2.Anchor = AnchorStyles.None;
+            textBox2.Location = new Point(459, 254);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(100, 23);
+            textBox2.TabIndex = 12;
+            textBox2.TextAlign = HorizontalAlignment.Center;
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(15);
-            this.button3.Size = new System.Drawing.Size(150, 75);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "RETURN";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.BackColor = Color.Thistle;
+            button3.Cursor = Cursors.No;
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.ForeColor = Color.Black;
+            button3.Location = new Point(0, 0);
+            button3.Name = "button3";
+            button3.Padding = new Padding(15);
+            button3.Size = new Size(140, 70);
+            button3.TabIndex = 15;
+            button3.Text = "RETURN";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // textBox3
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.textBox3.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox3.Location = new System.Drawing.Point(438, 313);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(149, 31);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.Text = "WIN";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.Visible = false;
+            textBox3.Anchor = AnchorStyles.None;
+            textBox3.BackColor = Color.FromArgb(255, 192, 128);
+            textBox3.Font = new Font("Verdana", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox3.ForeColor = Color.FromArgb(64, 64, 64);
+            textBox3.Location = new Point(438, 313);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(149, 31);
+            textBox3.TabIndex = 16;
+            textBox3.Text = "WIN";
+            textBox3.TextAlign = HorizontalAlignment.Center;
+            textBox3.Visible = false;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Thistle;
+            label1.BorderStyle = BorderStyle.Fixed3D;
+            label1.Font = new Font("Myanmar Text", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(960, 660);
+            label1.Name = "label1";
+            label1.Size = new Size(137, 23);
+            label1.TabIndex = 17;
+            label1.Text = "Time wasted: 00:00:00";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label2.BackColor = Color.Thistle;
+            label2.Font = new Font("Myanmar Text", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(984, 628);
+            label2.Name = "label2";
+            label2.Size = new Size(110, 21);
+            label2.TabIndex = 18;
+            label2.Text = "Winrate: 00%";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkGreen;
-            this.BackgroundImage = global::BlackJackV1.Properties.Resources.gamescreenbg;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1117, 690);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkGreen;
+            BackgroundImage = Properties.Resources.gamescreenbg;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1117, 690);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(textBox3);
+            Controls.Add(button3);
+            Controls.Add(textBox2);
+            Controls.Add(textBox1);
+            Controls.Add(pictureBox9);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(pictureBox5);
+            Controls.Add(pictureBox6);
+            Controls.Add(pictureBox7);
+            Controls.Add(pictureBox8);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            Shown += Form1_Shown;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -292,5 +329,8 @@
         private TextBox textBox2;
         private Button button3;
         private TextBox textBox3;
+        private System.Windows.Forms.Timer timer1;
+        private Label label1;
+        private Label label2;
     }
 }

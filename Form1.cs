@@ -1,7 +1,8 @@
-// To do:           // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN
-                    // animate the getting cards 
-                    // Errors: displaying the wrong cards. : DONE
-                    // works only for the first time after a change so we have to set something to 0 : DONE
+// To do:           // instead of MessageBox when bust or win display a before hidden textBox with the text BUST or WIN : DONE
+// Errors: displaying the wrong cards. : DONE
+// works only for the first time after a change so we have to set something to 0 : DONE
+// once winrate reaches 100% it remains 100% for some odd reason
+// Animation + wait between dealing a second card for the dealer
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,21 @@ using System.Windows.Forms;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net.Security;
+using static System.Windows.Forms.DataFormats;
+using System.Reflection.Emit;
+using System.Drawing.Text;
 
 namespace BlackJackV1
 {
-    
+
     public partial class Form1 : Form
     {
         // default settings
+        private int games_played = 0;
+        private int player_wins = 1;
+        private int player_losses = 1;
+        private double winrate = 0;
+
         private int player_cardCount = 0;
         private int dealer_cardCount = 0;
         private bool? playerWantsHit = null;
@@ -27,8 +36,10 @@ namespace BlackJackV1
         const int g_maximumScore = 21;        // Maximum score before losing
         const int g_minimumDealerScore = 17;
         const int initial_Number = 0;
+        private DateTime _start;
+
         public Form1()
-        { 
+        {
             InitializeComponent();
             textBox1.Text = "";
             textBox2.Text = "";
@@ -124,7 +135,7 @@ namespace BlackJackV1
             private int m_cardIndex = 0;
             public Deck()
             {
-               int index = 0;
+                int index = 0;
                 for (int suit = 0; suit < (int)Card.Suit.MaxSuits; ++suit)
                 {
                     for (int rank = 0; rank < (int)Card.Rank.MaxRanks; ++rank)
@@ -173,20 +184,20 @@ namespace BlackJackV1
                 m_score += value;
                 return value;
             }
-            public int Score 
+            public int Score
             {
                 get { return m_score; }
             }
-            public bool IsBust() // only bust if m_score > g_maximumScore is a true inequality
+            public bool IsBust() // only bust if m_score > g_maximumScore is a true inequation
             {
                 return (m_score > g_maximumScore);
             }
             public bool HasBlackjack()
             {
-                if(m_score == g_maximumScore) return true;
+                if (m_score == g_maximumScore) return true;
                 else return false;
             }
-            public Card CurrentCard
+            public Card CurrentCard /// could be a problem here?
             {
                 //Card dealtCard = m_deck[m_cardIndex]; // saves the card
                 //return dealtCard;
@@ -200,12 +211,12 @@ namespace BlackJackV1
         {
             while (true)
             {
-                    playerWantsHit = null;                     // Reset the playerWantsHit flag
+                playerWantsHit = null;                     // Reset the playerWantsHit flag
                 // Wait for the player to click one of the buttons
                 while (playerWantsHit == null)
-                    {
-                        Application.DoEvents();
-                    }
+                {
+                    Application.DoEvents();
+                }
                 return playerWantsHit == true;                // Return the value of the playerWantsHit flag
             }
         }
@@ -213,7 +224,7 @@ namespace BlackJackV1
         {
             while (true)
             {
-               
+
                 if (player.IsBust()) // if true bust; returns wrong bool value IsBust() logic doesn't work
                 {
                     MessageBox.Show("You busted. :( ");
@@ -224,10 +235,11 @@ namespace BlackJackV1
                     return false;
                 }
                 else
-                {
+                {// problem here with showing the wrong score after 2 of the same cards FIXED
                     if (PlayerWantsHit()) // should not come in here until the user presses on the PlayerWantsHit function; player always wants hit cus it always returns true
                     {
                         player_cardCount++;
+                        int playerCard = player.DrawCard(deck); // do not use var
                         switch (player_cardCount)
                         {
                             case 1:
@@ -245,7 +257,6 @@ namespace BlackJackV1
                                     break;
                                 }
                         }
-                        var playerCard = player.DrawCard(deck); // using var instead of keyword auto as in C++
                         textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard
                     }
                     else
@@ -258,17 +269,15 @@ namespace BlackJackV1
         }
         bool DealerTurn(Deck deck, Player dealer)
         {
-            while (dealer.Score < g_minimumDealerScore)
+            while (dealer.Score < g_minimumDealerScore) // check whether this while cycle only runs once per game
             {
                 dealer_cardCount++;
                 int dealerCard = dealer.DrawCard(deck); // got to do with drawing the card itself(score) so also with GetImagePath()
+                Thread.Sleep(200);
                 switch (dealer_cardCount)
                 {
                     case 1:
                         {
-                            //var program = new Program();
-                            // our current card :                                 return m_deck[m_cardIndex++];
-                            //                 int value = deck.DealCard().Value(); the current card if not mistaken
                             pictureBox7.Visible = true;
                             string imagePath = dealer.CurrentCard.GetImagePath();
                             pictureBox7.Image = Image.FromFile(imagePath);
@@ -304,7 +313,7 @@ namespace BlackJackV1
             return false;
         }
         bool PlayBlackjack(Deck deck)
-        { 
+        {
             Player dealer = new Player();
             dealer.DrawCard(deck);
             string imagePath = dealer.CurrentCard.GetImagePath();
@@ -329,6 +338,11 @@ namespace BlackJackV1
             }
             return (player.Score > dealer.Score);
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TimeSpan duration = DateTime.Now - _start;
+            label1.Text = "Time wasted: " + duration.ToString(@"hh\:mm\:ss");
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             stillPlaying = false;
@@ -345,10 +359,19 @@ namespace BlackJackV1
         private void Form1_Load(object sender, EventArgs e)
         {
             stillPlaying = true;
+            _start = DateTime.Now;
+            timer1.Start();
         }
-        private void Form1_Shown(object sender, EventArgs e)
+        private void Winrate() // winrate somehow stays 100% after losing several times debug both values using labels
         {
-            while(stillPlaying)
+            games_played++; // problem with winrate rising?
+            if (player_losses > 0) winrate = (double)((player_wins / player_losses)) * 100;
+            if (winrate > 100) winrate = 100;
+            label2.Text = "Winrate: " + winrate.ToString(@"0.##") + "%";
+        }
+        private void Form1_Shown(object sender, EventArgs e) // main
+        {
+            while (stillPlaying)
             {
                 Deck deck = new Deck();
                 deck.Shuffle();
@@ -361,6 +384,7 @@ namespace BlackJackV1
                     textBox3.ForeColor = Color.Green;
                     textBox3.Text = "WIN";
                     MessageBox.Show("You win!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    player_wins++;
                     //Thread.Sleep(100);
                 }
                 else
@@ -369,19 +393,22 @@ namespace BlackJackV1
                     textBox3.ForeColor = Color.Red;
                     textBox3.Text = "LOSS";
                     MessageBox.Show("You lose!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    player_losses++;
                     //Thread.Sleep(100);
                 }
+                Winrate();
                 textBox1.Text = "";
                 textBox2.Text = "";
-                textBox3.Text = "";    
+                textBox3.Text = "";
                 textBox3.Visible = false;
                 pictureBox7.Visible = false;
                 pictureBox6.Visible = false;
-                pictureBox5.Visible = false;   
+                pictureBox5.Visible = false;
                 pictureBox4.Visible = false;
                 pictureBox3.Visible = false;
                 Thread.Sleep(1000);
             }
         }
+
     }
 }
