@@ -278,6 +278,8 @@
             BackgroundImage = Properties.Resources.gamescreenbg;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1117, 690);
+            Controls.Add(pictureBox5);
+            Controls.Add(pictureBox6);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBox3);
@@ -287,8 +289,6 @@
             Controls.Add(pictureBox9);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(pictureBox5);
-            Controls.Add(pictureBox6);
             Controls.Add(pictureBox7);
             Controls.Add(pictureBox8);
             Controls.Add(pictureBox4);

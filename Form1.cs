@@ -3,6 +3,7 @@
 // works only for the first time after a change so we have to set something to 0 : DONE
 // once winrate reaches 100% it remains 100% for some odd reason
 // Animation + wait between dealing a second card for the dealer
+// take ace as 1 or 10 logic to decide this and if player has blackjack dealer doesn't draw card
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -232,7 +233,8 @@ namespace BlackJackV1
                 }
                 if (player.HasBlackjack())
                 {
-                    return false;
+                    //goto PlayBlackjack(deck);
+                    return false; // jmp to playerwin?
                 }
                 else
                 {// problem here with showing the wrong score after 2 of the same cards FIXED
@@ -269,6 +271,15 @@ namespace BlackJackV1
         }
         bool DealerTurn(Deck deck, Player dealer)
         {
+            if (dealer.IsBust())
+            {
+                MessageBox.Show("The dealer busted!");
+                return true;
+            }
+            if (dealer.HasBlackjack())
+            {
+                return false;
+            }
             while (dealer.Score < g_minimumDealerScore) // check whether this while cycle only runs once per game
             {
                 dealer_cardCount++;
@@ -300,17 +311,9 @@ namespace BlackJackV1
                         }
                 }
                 textBox2.Text = ("dealer: " + dealer.Score);
+           
             }
-            if (dealer.IsBust())
-            {
-                MessageBox.Show("The dealer busted!");
-                return true;
-            }
-            if (dealer.HasBlackjack())
-            {
-                return false;
-            }
-            return false;
+             return false;
         }
         bool PlayBlackjack(Deck deck)
         {
@@ -364,9 +367,9 @@ namespace BlackJackV1
         }
         private void Winrate() // winrate somehow stays 100% after losing several times debug both values using labels
         {
-            games_played++; // problem with winrate rising?
-            if (player_losses > 0) winrate = (double)((player_wins / player_losses)) * 100;
-            if (winrate > 100) winrate = 100;
+            games_played++; 
+            winrate = (double)((player_wins / games_played)) * 100;
+            //if (winrate > 100) winrate = 100;
             label2.Text = "Winrate: " + winrate.ToString(@"0.##") + "%";
         }
         private void Form1_Shown(object sender, EventArgs e) // main
