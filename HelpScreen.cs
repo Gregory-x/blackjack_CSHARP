@@ -44,12 +44,11 @@ namespace BlackJackV1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Form1 blackjack = new Form1();
+            //blackjack.Show();
             this.Close();
+            //this.Close();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

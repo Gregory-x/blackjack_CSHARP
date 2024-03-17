@@ -268,7 +268,7 @@
             label2.Name = "label2";
             label2.Size = new Size(110, 21);
             label2.TabIndex = 18;
-            label2.Text = "Winrate: 00%";
+            label2.Text = "";
             // 
             // Form1
             // 

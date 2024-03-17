@@ -28,78 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            label1 = new Label();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Lucida Fax", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(343, 172);
-            this.button1.Margin = new System.Windows.Forms.Padding(10);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(1);
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "PLAY";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.LoadGame);
+            button1.Anchor = AnchorStyles.None;
+            button1.AutoSize = true;
+            button1.BackColor = Color.Green;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Lucida Fax", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(343, 172);
+            button1.Margin = new Padding(10);
+            button1.Name = "button1";
+            button1.Padding = new Padding(1);
+            button1.RightToLeft = RightToLeft.No;
+            button1.Size = new Size(100, 50);
+            button1.TabIndex = 0;
+            button1.Text = "PLAY";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += LoadGame;
             // 
             // button2
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.AutoSize = true;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("Lucida Fax", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(343, 257);
-            this.button2.Margin = new System.Windows.Forms.Padding(10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 50);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "HELP";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.LoadHelp);
+            button2.Anchor = AnchorStyles.None;
+            button2.AutoSize = true;
+            button2.BackColor = Color.FromArgb(192, 255, 192);
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Font = new Font("Lucida Fax", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = Color.Black;
+            button2.Location = new Point(343, 257);
+            button2.Margin = new Padding(10);
+            button2.Name = "button2";
+            button2.Size = new Size(100, 50);
+            button2.TabIndex = 1;
+            button2.Text = "HELP";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += LoadHelp;
             // 
             // button3
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.AutoSize = true;
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Lucida Fax", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(343, 343);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 50);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "EXIT";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.LoadExit);
+            button3.Anchor = AnchorStyles.None;
+            button3.AutoSize = true;
+            button3.BackColor = Color.Red;
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.Font = new Font("Lucida Fax", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.ForeColor = Color.Black;
+            button3.Location = new Point(343, 343);
+            button3.Name = "button3";
+            button3.Size = new Size(100, 50);
+            button3.TabIndex = 2;
+            button3.Text = "EXIT";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += LoadExit;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(395, 60);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 15);
+            label1.TabIndex = 3;
             // 
             // StartingScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::BlackJackV1.Properties.Resources.gamescreenbg;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Name = "StartingScreen";
-            this.Text = "StartingScreen";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.gamescreenbg;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Name = "StartingScreen";
+            Text = "StartingScreen";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -107,5 +116,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Label label1;
     }
 }
