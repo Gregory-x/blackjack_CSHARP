@@ -5,7 +5,7 @@
 // Animation + wait between dealing a second card for the dealer DONE
 // take ace as 1 or 10 logic to decide this and if player has blackjack dealer doesn't draw card DONE
 // winrate + randomly losing DONE
-// center welcome message
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +36,7 @@ namespace BlackJackV1
         private int dealer_cardCount = 0;
         private bool? playerWantsHit = null;
         private bool stillPlaying = false;
-        const int g_maximumScore = 21;        // Maximum score before losing
+        const int g_maximumScore = 21;        
         const int g_minimumDealerScore = 17;
         const int initial_Number = 0;
         private DateTime _start;
@@ -89,7 +89,7 @@ namespace BlackJackV1
                 this.rank = rank;
                 this.suit = suit;
             }
-            public string GetImagePath() // This version uses string interpolation to construct the file path based on the current suit and rank values. It first converts the suit and rank enums to lowercase strings, then combines them using string interpolation to create the file path. This approach removes the need for the large switch statement.
+            public string GetImagePath()
             {
                 string suitName = suit.ToString().ToLower();
                 string rankName = rank.ToString().ToLower();
@@ -126,8 +126,6 @@ namespace BlackJackV1
                     case Rank.RankAce:
                         return 11;
                     default:
-                        //Debug.Assert(false, "Shouldn't happen ever");
-                        //assert(false && "should never happen");
                         return 0;
                 }
             }
@@ -175,7 +173,6 @@ namespace BlackJackV1
         {
             private int m_score;
             private Card m_currentCard;
-            // list which has all the players' cards
             public Player()
             {
                 m_score = 0;
@@ -195,7 +192,7 @@ namespace BlackJackV1
             {
                 get { return m_score; }
             }
-            public bool IsBust() // only bust if m_score > g_maximumScore is a true inequation
+            public bool IsBust() 
             {
                 return (m_score > g_maximumScore);
             }
@@ -204,27 +201,22 @@ namespace BlackJackV1
                 if (m_score == g_maximumScore) return true;
                 else return false;
             }
-            public Card CurrentCard /// could be a problem here?
+            public Card CurrentCard 
             {
-                //Card dealtCard = m_deck[m_cardIndex]; // saves the card
-                //return dealtCard;
-                //return m_deck[m_cardIndex]; // saves the card
                 get { return m_currentCard; }
-
             }
         }
-        // end of classes and start of member and just functions
         bool PlayerWantsHit()
         {
             while (true)
             {
-                playerWantsHit = null;                     // Reset the playerWantsHit flag
+                playerWantsHit = null; // Reset the playerWantsHit flag
                 // Wait for the player to click one of the buttons
                 while (playerWantsHit == null)
                 {
                     Application.DoEvents();
                 }
-                return playerWantsHit == true;                // Return the value of the playerWantsHit flag
+                return playerWantsHit == true; // Return the value of the playerWantsHit flag
             }
         }
         bool PlayerTurn(Deck deck, Player player)
@@ -232,25 +224,25 @@ namespace BlackJackV1
             while (true)
             {
 
-                if (player.IsBust()) // if true bust; returns wrong bool value IsBust() logic doesn't work
+                if (player.IsBust())
                 {
                     MessageBox.Show("You busted. :( ");
                     return true;
                 }
                 
                 else
-                {// problem here with showing the wrong score after 2 of the same cards FIXED
-                    if (PlayerWantsHit()) // should not come in here until the user presses on the PlayerWantsHit function; player always wants hit cus it always returns true
+                {
+                    int aces = 0;
+                    if (PlayerWantsHit())
                     {
                         player_cardCount++;
-                        int aces = 0;
                         int playerCard = player.DrawCard(deck); // do not use var/auto
                         switch (player_cardCount)
                         {
                             case 1:
                                 {
                                     pictureBox3.Visible = true;
-                                    string imagePath = player.CurrentCard.GetImagePath(); // not the current card, this just deals a random other card so the score and the displayed image of the card will not match
+                                    string imagePath = player.CurrentCard.GetImagePath();
                                     pictureBox3.Image = Image.FromFile(imagePath);
                                     break;
                                 }
@@ -262,15 +254,19 @@ namespace BlackJackV1
                                     break;
                                 }
                         }
+                        if (player.HasBlackjack())
+                        {
+                            return false;
+                        }
                         if (playerCard == 11)
                         {
                             aces++;
                         }
                         if (player.IsBust())
                         {
-                            for (int i = 0; i <= aces; i++) player.ChangeScore(10);
+                            for (int i = 0; i < aces; i++) player.ChangeScore(10);
                         }
-                        textBox1.Text = ($"player: {player.Score}"); // predicts the next card {playerCard
+                        textBox1.Text = ($"player: {player.Score}");
                     }
                     else
                     {
@@ -282,12 +278,13 @@ namespace BlackJackV1
         }
         bool DealerTurn(Deck deck, Player dealer)
         {
-            while (dealer.Score < g_minimumDealerScore) // check whether this while cycle only runs once per game
+            while (dealer.Score < g_minimumDealerScore)
             {
+
                 dealer_cardCount++;
                 int aces = 0;
-                int dealerCard = dealer.DrawCard(deck); // got to do with drawing the card itself(score) so also with GetImagePath()
-                Thread.Sleep(200);
+                int dealerCard = dealer.DrawCard(deck);
+                Thread.Sleep(1000);
                 switch (dealer_cardCount)
                 {
                     case 1:
@@ -313,13 +310,17 @@ namespace BlackJackV1
                             break;
                         }
                 }
+                if (dealer.HasBlackjack())
+                {
+                    return false;
+                }
                 if (dealerCard == 11)
                 {
                     aces++;
                 }
                 if (dealer.IsBust())
                 {
-                    for (int i = 0; i <= aces; i++) dealer.ChangeScore(10);
+                    for (int i = 0; i < aces; i++) dealer.ChangeScore(10);
                 }
                 textBox2.Text = ("dealer: " + dealer.Score);
             }
@@ -329,10 +330,7 @@ namespace BlackJackV1
                 return true;
             }
             
-            if (dealer.HasBlackjack())
-            {
-                return false;
-            }
+
             return false;
         }
         int PlayBlackjack(Deck deck)
@@ -341,15 +339,15 @@ namespace BlackJackV1
             dealer.DrawCard(deck);
             string imagePath = dealer.CurrentCard.GetImagePath();
             pictureBox8.Image = Image.FromFile(imagePath);
-            textBox2.Text = ("dealer: " + dealer.Score); // on second thought it's actually useful keep it
+            textBox2.Text = ("dealer: " + dealer.Score); 
             Player player = new Player();
-            player.DrawCard(deck); // should show the pictures when draws the card
+            player.DrawCard(deck); 
             string imagePath2 = player.CurrentCard.GetImagePath();
             pictureBox1.Image = Image.FromFile(imagePath2);
             player.DrawCard(deck);
             string imagePath3 = player.CurrentCard.GetImagePath();
             pictureBox2.Image = Image.FromFile(imagePath3);
-            textBox1.Text = ("player: " + player.Score); // 
+            textBox1.Text = ("player: " + player.Score); 
             Thread.Sleep(500);
             if (PlayerTurn(deck, player))
             {
@@ -387,13 +385,8 @@ namespace BlackJackV1
             _start = DateTime.Now;
             timer1.Start();
         }
-        private void Winrate() // winrate somehow stays 100% after losing several times debug both values using labels
+        private void Winrate() 
         {
-            /*games_played++; 
-            winrate = (double)((player_wins / games_played)) * 100;
-            //if (winrate > 100) winrate = 100;
-            label2.Text = "Winrate: " + winrate.ToString(@"0.##") + "%";*/
-            // Ensure floating-point division by casting to double
             winrate = ((double)player_wins / games_played) * 100;
             // Update the label text
             label2.Text = "Winrate: " + winrate.ToString("0.##") + "%";
@@ -407,32 +400,29 @@ namespace BlackJackV1
                 dealer_cardCount = 0;
                 player_cardCount = 0;
                 int result = PlayBlackjack(deck);
-                if (result == 2) // if true you win else you've lost
+                if (result == 2)
                 {
                     textBox3.Visible = true;
                     textBox3.ForeColor = Color.Green;
                     textBox3.Text = "WIN";
-                    MessageBox.Show("You win!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
+                    MessageBox.Show("You win!");
                     player_wins++;
                     games_played++;
-                    //Thread.Sleep(100);
                 }
                 else if (result == 1)
                 {
                     textBox3.Visible = true;
                     textBox3.ForeColor = Color.Red;
                     textBox3.Text = "LOSS";
-                    MessageBox.Show("You lose!"); // should loop the play Blackjack until the user presses on the back to main menu 
-                    games_played++;
-                    //Thread.Sleep(100);
+                    MessageBox.Show("You lose!");  
+                    games_played++;  
                 }
                 else if (result == 3)
                 {
                     textBox3.Visible = true;
                     textBox3.ForeColor = Color.Gray;
                     textBox3.Text = "DRAW";
-                    MessageBox.Show("DRAW!"); // should loop the play Blackjack until the user presses on the back to main menu arrow
-                    //Thread.Sleep(100);
+                    MessageBox.Show("DRAW!"); 
                 }
                 Winrate();
                 textBox1.Text = "";
